@@ -1,6 +1,8 @@
 To Do Now
 
 - Make puck class
+- Puck collision detection
+- Puck movement
 
 
 To Do Later
@@ -15,4 +17,5 @@ To Do Later
 - Constrain player to field
 
 Done
+
 - Fix isMoving variable (should be false whenever mouse is not moving)

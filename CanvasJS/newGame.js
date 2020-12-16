@@ -15,6 +15,8 @@ var frames = 0;
 var start = new Date();
 var now = new Date();
 
+var puck = new Puck();
+
 function calculateFPS () {
   /*
     Parameters: None
@@ -31,6 +33,8 @@ function calculateFPS () {
 }
 
 function Update(){
+  puck.applyVelocity();
+  puck.wallBounceCheck();
   //Sets Velocity to 0, is overwritten if mouse has been moved
   if (isMoving == false){
     circleVel = [0,0];
@@ -52,6 +56,8 @@ function drawAll(){
 
   // Clears canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
+  puck.draw();
+  //console.log(puck.pos);
   //Draw Player Circle
   context.beginPath();
   context.arc(circlePos[0], circlePos[1], circlePos[2], 0, 2*Math.PI);
@@ -60,7 +66,7 @@ function drawAll(){
 
   // Loop the animation to the next frame.
   window.requestAnimationFrame(drawAll);
-  console.log(circleVel);
+  //console.log(circleVel);
 }
 
 function calculateCircleVel(){
@@ -82,6 +88,7 @@ function playerMouseMove(event){
   circleOldPos = [circlePos[0], circlePos[1]];
   circlePos = [event.clientX, event.clientY, circlePos[2]];
   circleVel = calculateCircleVel();
+  //console.log(event.clientX, event.clientY)
 }
 
 // Get width/height of the browser window
@@ -92,8 +99,8 @@ windowHeight = window.innerHeight;
 // Get the canvas, set the width and height from the window
 canvas = document.getElementById("mainCanvas");
 // I found that - 20 worked well for me, YMMV
-canvas.width = windowWidth;
-canvas.height = windowHeight;
+canvas.width = windowWidth - windowWidth/10;
+canvas.height = windowHeight - windowHeight/10;
 canvas.style.border = "1px solid black";
 
 // Set up the context for the animation
