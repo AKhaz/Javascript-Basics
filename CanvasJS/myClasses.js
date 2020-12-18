@@ -49,6 +49,5 @@ class Puck {
     context.beginPath();
     context.arc(this.pos[0], this.pos[1], this.pos[2], 0, 2*Math.PI);
     context.fill();
-    //console.log(this.pos[0], this.pos[1]);
  }
 }

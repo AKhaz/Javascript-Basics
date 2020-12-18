@@ -7,6 +7,7 @@ var circlePos = [0, 0, 50];
 var circleVel = [0, 0];
 //Keep track of circle's position on previous frame to calculate velocity
 var circleOldPos = [0, 0];
+var circleCol = "#000000"
 //Keeps track if the mouse is being moved, if not veloctiy is [0,0]
 var isMoving = false;
 
@@ -27,8 +28,6 @@ function calculateFPS () {
   if (frames % 200 == 0) {
     now = new Date();
     msecs = now.getTime() - start.getTime();
-    //console.log(now.getTime());
-    //console.log("fps:", (frames / msecs) * 1000);
   }
 }
 
@@ -67,7 +66,6 @@ function drawAll(){
     }
   }
 
-  console.log(puck.vel);
 
   //Resets isMoving Variable
   isMoving = false;
@@ -77,16 +75,14 @@ function drawAll(){
   // Clears canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
   puck.draw();
-  //console.log(puck.pos);
   //Draw Player Circle
+  context.fillStyle = circleCol;
   context.beginPath();
   context.arc(circlePos[0], circlePos[1], circlePos[2], 0, 2*Math.PI);
-  context.stroke();
-  //console.log(circlePos);
+  context.fill();
 
   // Loop the animation to the next frame.
   window.requestAnimationFrame(drawAll);
-  //console.log(circleVel);
 }
 
 function checkCollision(){
