@@ -47,6 +47,11 @@ function Update(){
 }
 
 function checkCollision(){
+  /*
+    Purpose: Checks collion
+    Inputs: None, but it is affected by what the other functions are doing
+    Returns: None, but it calls itself to cycle to the next frame
+  */
   //Assigning variables used later to calculate dist formula/radius circle distance
   var radiusAdded = circlePos[2] + puck.pos[2];
   var xAdded = circlePos[0] - puck.pos[0];
@@ -72,8 +77,9 @@ function drawAll(){
 
   if (checkCollision() == true){
     //If the player isn't moving, we dont want the puck to stop moving too, getting stuck
-    if (circleVel == [0,0]){
-      puck.vel = 0-(puck.vel);
+    if ((circleVel == [0]) && (circleVel == [1])){
+      puck.vel[0] = -puck.vel[0];
+      puck.vel[1] = -puck.vel[1];
     }
     else{
       puck.vel = circleVel;

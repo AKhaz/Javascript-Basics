@@ -3,7 +3,6 @@ class Puck {
     this.pos = [100, 100, 30]
     this.vel = [4, 3];
     this.color = "#0000ff";
-    this.cap = 'round';
   }
 
   applyVelocity(){
@@ -35,7 +34,7 @@ class Puck {
   }
 
   draw() {
-    context.fillStyle = "#000000";
+    context.fillStyle = this.color;
     context.beginPath();
     context.arc(this.pos[0], this.pos[1], this.pos[2], 0, 2*Math.PI);
     context.fill();
