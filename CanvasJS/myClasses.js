@@ -2,7 +2,6 @@ class Puck {
   constructor() {
     this.pos = [100, 100, 30]
     this.vel = [4, 3];
-    //this.slowdownFactor = 0.1;
     this.color = "#0000ff";
     this.cap = 'round';
   }
@@ -10,7 +9,6 @@ class Puck {
   applyVelocity(){
     this.pos[0] += this.vel[0];
     this.pos[1] += this.vel[1];
-    //this.vel *= this.slowdownFactor;
   }
 
   wallBounceCheck(){

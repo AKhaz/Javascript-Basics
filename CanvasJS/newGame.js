@@ -39,6 +39,27 @@ function Update(){
   if (isMoving == false){
     circleVel = [0,0];
   }
+
+  // if (checkCollision == true){
+  //   puck.vel = circleVel;
+  //   console.log("true");
+  // }
+}
+
+function checkCollision(){
+  //Assigning variables used later to calculate dist formula/radius circle distance
+  var radiusAdded = circlePos[2] + puck.pos[2];
+  var xAdded = circlePos[0] - puck.pos[0];
+  var yAdded = circlePos[1] - puck.pos[1];
+
+  //If the distance bwteen the radius of the two circle is GREATER
+  //than the actual distance (using dist formula)
+  if (radiusAdded > Math.sqrt((xAdded * xAdded) + (yAdded * yAdded))){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 function drawAll(){
   /*
@@ -48,6 +69,18 @@ function drawAll(){
   */
 
   Update();
+
+  if (checkCollision() == true){
+    //If the player isn't moving, we dont want the puck to stop moving too, getting stuck
+    if (circleVel == [0,0]){
+      puck.vel = 0-(puck.vel);
+    }
+    else{
+      puck.vel = circleVel;
+    }
+  }
+
+  console.log(puck.vel);
 
   //Resets isMoving Variable
   isMoving = false;
