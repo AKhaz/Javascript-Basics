@@ -1,21 +1,16 @@
 To Do Now
 
-- Make puck class
-- Puck collision detection
-- Puck movement
-
 
 To Do Later
 
-- Puck collision detection
-- Puck movement
-- Puck bounce of walls
-- Goals
-- Puck reset when hit goal
-- Player reset when goal made
-- Score
-- Constrain player to field
+- Score/Speed Count
 
 Done
 
 - Fix isMoving variable (should be false whenever mouse is not moving)
+- Puck collision detection
+- Puck movement
+- Puck bounce of walls
+- Make puck class
+- Puck collision detection
+- Puck movement
