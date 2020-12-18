@@ -2,7 +2,7 @@ class Puck {
   constructor() {
     this.pos = [100, 100, 30]
     this.vel = [4, 3];
-    this.color = "#0000ff";
+    this.color = "#000000";
   }
 
   applyVelocity(){
@@ -31,6 +31,17 @@ class Puck {
       //Reverses x-speed
       this.vel[0] *= -1;
     }
+  }
+
+  randomRange(min, max) {
+    return Math.floor(Math.random()*(max - min + 1))+min;
+  }
+
+  changeColor(){
+    var r = puck.randomRange(0, 255);
+    var g = puck.randomRange(0, 255);
+    var b = puck.randomRange(0, 255);
+    this.color = "rgb(" + r + "," + g + "," + b + ")";
   }
 
   draw() {

@@ -19,9 +19,9 @@ var puck = new Puck();
 
 function calculateFPS () {
   /*
+    Purpose: Calculate and write to console the frame rate.
     Parameters: None
     Returns: None
-    Purpose: Calculate and write to console the frame rate.
   */
   frames += 1;
   if (frames % 200 == 0) {
@@ -33,39 +33,19 @@ function calculateFPS () {
 }
 
 function Update(){
+  /*
+    Purpose: Updates every frame; manages updating puck, updates circleVel
+    Inputs: None
+    Returns: None
+  */
   puck.applyVelocity();
   puck.wallBounceCheck();
   //Sets Velocity to 0, is overwritten if mouse has been moved
   if (isMoving == false){
     circleVel = [0,0];
   }
-
-  // if (checkCollision == true){
-  //   puck.vel = circleVel;
-  //   console.log("true");
-  // }
 }
 
-function checkCollision(){
-  /*
-    Purpose: Checks collion
-    Inputs: None, but it is affected by what the other functions are doing
-    Returns: None, but it calls itself to cycle to the next frame
-  */
-  //Assigning variables used later to calculate dist formula/radius circle distance
-  var radiusAdded = circlePos[2] + puck.pos[2];
-  var xAdded = circlePos[0] - puck.pos[0];
-  var yAdded = circlePos[1] - puck.pos[1];
-
-  //If the distance bwteen the radius of the two circle is GREATER
-  //than the actual distance (using dist formula)
-  if (radiusAdded > Math.sqrt((xAdded * xAdded) + (yAdded * yAdded))){
-    return true;
-  }
-  else{
-    return false;
-  }
-}
 function drawAll(){
   /*
     Purpose: This is the main drawing loop.
@@ -76,8 +56,9 @@ function drawAll(){
   Update();
 
   if (checkCollision() == true){
+    puck.changeColor();
     //If the player isn't moving, we dont want the puck to stop moving too, getting stuck
-    if ((circleVel == [0]) && (circleVel == [1])){
+    if ((circleVel[0] == 0) && (circleVel[1] == 0)){
       puck.vel[0] = -puck.vel[0];
       puck.vel[1] = -puck.vel[1];
     }
@@ -108,6 +89,27 @@ function drawAll(){
   //console.log(circleVel);
 }
 
+function checkCollision(){
+  /*
+    Purpose: Checks collion between two circle, the player and the puck
+    Inputs: No inputs. Takes the global variables for positions and radius
+    Returns: True or False for collision
+  */
+  //Assigning variables used later to calculate dist formula/radius circle distance
+  var radiusAdded = circlePos[2] + puck.pos[2];
+  var xAdded = circlePos[0] - puck.pos[0];
+  var yAdded = circlePos[1] - puck.pos[1];
+
+  //If the distance bwteen the radius of the two circle is GREATER
+  //than the actual distance (using dist formula)
+  if (radiusAdded > Math.sqrt((xAdded * xAdded) + (yAdded * yAdded))){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
 function calculateCircleVel(){
   /*
     Purpose: This function calculates the velocity of the player's puck.
@@ -121,6 +123,12 @@ function calculateCircleVel(){
 }
 
 function playerMouseMove(event){
+  /*
+    Purpose:  Handles player mouse movement, and updates
+    the player circle values accordingly.
+    Inputs: Event listener for mouse movement
+    Returns: None
+  */
   // This function is only called when the player moves their mouse,
   // as such, it wont count a velocity of [0,0] (mouse not moving)
   isMoving = true;
